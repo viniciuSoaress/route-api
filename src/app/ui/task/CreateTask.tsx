@@ -35,6 +35,7 @@ export function CreateTask() {
   return (
     <form
       onSubmit={handleSubmit(handleTask)}
+      className='mt-10'
     >
       <h2>crie suas tarefas</h2>
 
