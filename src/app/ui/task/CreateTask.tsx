@@ -21,7 +21,7 @@ export function CreateTask() {
     formState: { errors },
     register
   } = useForm<Task>({
-    mode: 'all',
+    mode: 'onSubmit',
     resolver: zodResolver(TaskSchema)
   })
 
@@ -30,21 +30,30 @@ export function CreateTask() {
       method: 'POST',
       body: JSON.stringify(data.name)
     })
+    reset()
   }
 
   return (
+
     <form
       onSubmit={handleSubmit(handleTask)}
-      className='mt-10'
+      className='text-black flex w-full gap-5 justify-center'
     >
-      <h2>crie suas tarefas</h2>
+      <label htmlFor="">
 
-      <input
-        type="text"
-        {...register('name')}
-      />
+        <input
+          type="text"
+          placeholder='crie sua tarefa'
+          className='pl-2 p-1 rounded-lg outline-none'
+          {...register('name')}
+        />
+        <p className='text-xs text-red-500'>
+          {errors.name?.message ? errors.name?.message : ''}
+        </p>
 
-      <button type="submit">criar tarefa</button>
+      </label>
+      <button type="submit">criar</button>
     </form>
+
   )
 }
